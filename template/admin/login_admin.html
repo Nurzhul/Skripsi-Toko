@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body class="users-log">
+    <div class="login-container">
+      <form class="login-form" action="/sessionAdmin" method="POST">
+        <h2>Login</h2>
+        {{ if .error }}
+        <div class="error-message" style="color: red">
+          <i data-feather="alert-circle"></i> {{ .error }}
+        </div>
+        {{ end }} {{ if .success }}
+        <div class="success-message" style="color: blue">
+          <i data-feather="check-circle"></i> {{ .success }}
+        </div>
+        {{ end }}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          autocomplete="email"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          autocomplete="new-password"
+          id="password"
+        />
+        <input type="checkbox" onclick="togglePassword()" /> Tampilkan Password
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    feather.replace();
+  </script>
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      if (input) {
+        input.type = input.type === "password" ? "text" : "password";
+      }
+    }
+  </script>
+</html>

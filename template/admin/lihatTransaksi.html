@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- navbar mulai -->
+     <nav class="navbar">
+      <a href="/dasboardAdmin" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="/dasboardAdmin">Home</a>
+        <a href="/dasboardAdmin#user">User</a>
+        <a href="/produkAdmin">Produk</a>
+        <a href="#">transaksi</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        <a href="#" id="Shopping-cart"> <i data-feather="shopping-cart"></i></a>
+        {{ else }}
+        <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar selesai -->
+
+    <!-- lihat transaksi mulai -->
+    
+    <section class="keranjang">
+      <h2>Transaksi</h2>
+
+      <div class="kategori-filter">
+          <a href="/produkAdmin/Transaksi" class="btn-kategori">Semua</a>
+          <a href="/produkAdmin/Transaksi?status=Selesai" class="btn-kategori">Selesai</a>
+          <a href="/produkAdmin/Transaksi?status=Dikemas" class="btn-kategori">Dikemas</a>
+          <a href="/produkAdmin/Transaksi?status=Diantar" class="btn-kategori">Diantar</a>
+          <a href="/produkAdmin/Transaksi?status=Diproses" class="btn-kategori">Diproses</a>
+      </div>
+      <br>
+        {{ if .statuskey }}
+          <p>Menampilkan hasil pencarian: <strong>{{ .statuskey }}</strong></p>
+        {{ else }}
+          <p>Menampilkan semua transaksi</p>
+        {{ end }}
+        <br>
+      <div class="shoppingCart">
+        <div class="cartItem">
+          <div class="idtransaksi">
+            <h3>Order ID</h3>
+            <div class="itemPrice">
+             total
+            </div>  
+          </div>
+          <div>status</div>
+           <div class="idtransaksi">
+             status pembayaran
+          </div>
+          <div>Pengambilan</div>
+          <div>detail</div>
+        </div>
+        {{ range .order }}
+        <div class="cartItem">
+          <div class="idtransaksi">
+            <h3>{{ .ID }}</h3>
+            <div class="itemPrice">
+             {{ .TotPriceIDR }}
+            </div>   
+          </div>
+          <div>
+            <button class="edit-btn" onclick="openPopStatus('{{ .ID }}', '{{ .Status }}')">
+            {{ .Status }}
+            </button>
+          </div>
+           <div class="idtransaksi">
+              <button class="edit-btn"onclick="openPopStatusPay('{{ .ID }}', '{{ .StatusPayment }}')">
+                {{ .StatusPayment }}
+              </button>
+          </div>
+          <div> {{ .Pengambilan }}</div>
+           <a href="/produkAdmin/Transaksi/{{.ID}}" class="edit-btn">Lihat</a>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    <!-- lihat transaksi mulai -->
+
+    <!-- POP up konten form Mulai -->
+
+    <!-- pop up status  -->
+     <div class="popup" id="status-pop">
+        <div class="popup-content">
+          <span class="close" onclick="closePopStatus()">&times; </span>
+          <h2>Ubah status </h2>
+          <form id="statusForm" method="post" class="editpop">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option value="Diproses">Diproses</option>
+              <option value="Dikemas">Dikemas</option>
+              <option value="Diantar">Diantar</option>
+              <option value="Selesai">Selesai</option>
+            </select>
+            <button type="submit">Simpan</button>
+          </form>
+        </div>
+     </div>
+
+      <div class="popup" id="statusPay-pop">
+        <div class="popup-content">
+          <span class="close" onclick="closePopStatusPay()">&times; </span>
+          <h2>Ubah status </h2>
+          <form id="statusPayForm" method="post" class="editpop">
+            <label for="status">Status pembayaran</label>
+            <select id="status_payment" name="status_payment">
+              <option value="COD">COD</option>
+              <option value="Menunggu">Menunggu</option>
+              <option value="Lunas">Lunas</option>
+            </select>
+            <button type="submit">Simpan</button>
+          </form>
+        </div>
+     </div>
+     <!-- POP up konten selesai -->
+    <!-- footer mulai -->
+      <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+     <!-- footer selesai -->
+  </body>
+  <!-- feather icons  -->
+  <script>
+    feather.replace();
+    // pop up status form
+    function openPopStatus(id, currentStatus) {
+        const popup = document.getElementById('status-pop');
+        popup.style.display = 'block';
+
+        // Ubah action form sesuai ID yang diklik
+        const form = document.getElementById('statusForm');
+        form.action = `/produkAdmin/Transaksi/updateStatus/${id}`;
+
+        // Otomatis memilih status yang sekarang
+        document.getElementById('status').value = currentStatus;
+    }
+
+    function closePopStatus() {
+        document.getElementById('status-pop').style.display = 'none';
+    }
+
+    // pop up status payment
+    function openPopStatusPay(id, currentStatusPay) {
+        const popup = document.getElementById('statusPay-pop');
+        popup.style.display = 'block';
+
+        const form = document.getElementById('statusPayForm');
+        form.action = `/produkAdmin/Transaksi/updateStatusPay/${id}`;
+
+        document.getElementById('status_payment').value = currentStatusPay;
+    }
+
+    function closePopStatusPay() {
+        document.getElementById('statusPay-pop').style.display = 'none';
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const success = "{{ .success }}";
+    if (success) {
+      Swal.fire({
+        icon: "success",
+        title: success,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  </script>
+<script src="/js/indexScrip.js"></script>
+</html>
+
+  <!-- javscript -->

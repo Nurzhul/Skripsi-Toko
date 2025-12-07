@@ -1,0 +1,27 @@
+:root {
+  --primary: #8fbc8f;
+  --bg: #fff8dc;
+}
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 80px;
+  background-color: var(--primary);
+}
+h1 {
+  font-size: 3em;
+  color: #c0392b;
+}
+p {
+  font-size: 1.2em;
+  color: #333;
+}
+a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  background: #2980b9;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}

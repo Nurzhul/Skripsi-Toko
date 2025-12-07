@@ -1,0 +1,24 @@
+rencana 
+
+nama modul = toko
+
+
+
+______________________________________________________________________________________________________________________________
+berikan penjelasan lebih mengenai
+- Admin → mengelola produk → tercatat sebagai aksi, tapi biasanya tidak disimpan 
+    sebagai relasi permanen di ERD (cukup lewat hak akses/role).
+
+Mengapa Admin → Produk tidak jadi relasi permanen di ERD?
+• 	ERD (Entity Relationship Diagram) hanya menggambarkan data yang disimpan secara permanen dalam basis data.
+• 	Relasi yang digambar adalah hubungan antar entity yang memang menyimpan data (misalnya: User, Produk, Order).
+• 	Aktivitas Admin mengelola produk (menambah, mengedit, menghapus) adalah aksi operasional, bukan data yang perlu disimpan sebagai relasi khusus.
+Contoh:
+• 	Admin menambah produk → data produk baru masuk ke tabel Produk.
+• 	Admin mengedit produk → data di tabel Produk diperbarui.
+• 	Admin menghapus produk → data di tabel Produk dihapus.
+👉 Semua itu tercatat sebagai perubahan data di entity Produk, bukan sebagai relasi baru antara Admin dan Produk.
+________________________________________________________________________________________________________________________________
+-pertanyaan apa perbedaan desain rekayasa perangkat  dan metode pengembangan perangkat 
+
+- pelajari apa itu restAPI dan HTTP  lagi 

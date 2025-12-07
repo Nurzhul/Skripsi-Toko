@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- navbar mulai -->
+     <nav class="navbar">
+      <a href="/dasboardAdmin" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="/dasboardAdmin">Home</a>
+        <a href="/dasboardAdmin#user">User</a>
+        <a href="#pro">Produk</a>
+        <a href="/produkAdmin/Transaksi">transaksi</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        {{ else }}
+        <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar selesai -->
+
+    <!-- Produk mulai -->
+    
+    <section id="pro" class="tabel-container">
+        <h2>Produk</h2>
+        <a href="/produkAdmin/addProduk" class="cta">Tambah Produk</a>
+        <br>
+         <form action="/produkAdmin" method="get" class="form-search">
+          <input type="text" name="name" placeholder="Cari nama produk..." required>
+          <button type="submit" class="btn-search">Cari</button>
+        </form>
+        <br>
+        <div class="kategori-filter">
+          <a href="/produkAdmin" class="btn-kategori">Semua</a>
+          <a href="/produkAdmin?category=Alat" class="btn-kategori">Alat</a>
+          <a href="/produkAdmin?category=Pupuk" class="btn-kategori">Pupuk</a>
+          <a href="/produkAdmin?category=Obat" class="btn-kategori">Obat</a>
+        </div>
+        <br>
+        {{ if .keyword }}
+          <p>Menampilkan hasil pencarian: <strong>{{ .keyword }}</strong></p>
+        {{else if .namekey}}
+          <p>Menampilkan hasil pencarian: <strong>{{ .namekey }}</strong></p>
+        {{ else }}
+          <p>Menampilkan semua produk</p>
+        {{ end }}
+        <br>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>avatar</th>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th>kategori</th>
+                    <th>stok</th>
+                    <th>Harga</th>
+                    <th>Edit</th>
+                    <th>Action</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .produks }}
+                <tr>
+                    <td><img src="{{.ImageName}}" width="60"></td>
+                    <td>{{.Name}}</td>
+                    <td>{{.Description}}</td>
+                    <td>{{.Category}}</td>
+                    <td>{{.Stock}}</td>
+                    <td>{{.PriceIDR}}</td>
+                    <td><a href="/produkAdmin/updateProduk/{{.ID}}">Edit</a></td>
+                    <td><form action="/produkAdmin/deleteProduk/{{.ID}}" method="post" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                        <button type="submit" class="delete-btn">Delete</button>
+                        </form></td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+     </section>
+    <!-- Prduk selesai -->
+
+    <!-- footer mulai -->
+      <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+     <!-- footer selesai -->
+  </body>
+  <!-- feather icons  -->
+  <script>
+    feather.replace();
+  </script>
+<script src="/js/indexScrip.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const success = "{{ .success }}";
+    if (success) {
+      Swal.fire({
+        icon: "success",
+        title: success,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  </script>
+</html>
+
+  <!-- javscript -->

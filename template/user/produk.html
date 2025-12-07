@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- navbar mulai -->
+    <nav class="navbar">
+      <a href="/dasboard" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="/dasboard">Home</a>
+        <a href="/dasboard#about">Tentang Kami</a>
+        <a href="#pro">Produk</a>
+        <a href="#contact">Kontak</a>
+      </div>
+       <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/profile">Profile</a>
+            <a href="/produk/transaction">Transaksi</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        <a href="/produk/Keranjang" id="shopping-cart-button">
+           <i data-feather="shopping-cart"></i>
+           <span class="quantity-badge" id="cart-count">0</span>
+        </a>
+        {{ else }}
+        <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+        <form action="/produk" method="get" class="search-form">
+          <input type="search" name="name" id="search-box" placeholder="Cari nama produk..." required>
+          <button type="submit"for="search-box"><i data-feather="search"></i></button>
+        </form>
+      <!-- search form end -->
+    </nav>
+    <!-- Navbar selesai -->
+
+    <!-- Produk mulai -->
+    <section id="pro" class="produk">
+      <h2>Produk</h2>
+
+       <div class="kategori-filter">
+          <a href="/produk" class="btn-kategori">Semua</a>
+          <a href="/produk?category=Alat" class="btn-kategori">Alat</a>
+          <a href="/produk?category=Pupuk" class="btn-kategori">Pupuk</a>
+          <a href="/produk?category=Obat" class="btn-kategori">Obat</a>
+      </div>
+        <br>
+        {{ if .keyword }}
+          <p>Menampilkan hasil pencarian: <strong>{{ .keyword }}</strong></p>
+        {{else if .namekey}}
+          <p>Menampilkan hasil pencarian: <strong>{{ .namekey }}</strong></p>
+        {{ else }}
+          <p>Menampilkan semua produk</p>
+        {{ end }}
+        <br>
+      <div class="row">
+        {{ range .produks }}
+        <div class="product-card">
+          <div class="product-icons">
+            <a onclick="addToCart(this)" data-id="{{.ID}}" class="belanja">
+              <i data-feather="shopping-cart"></i>
+            </a>
+            <a href="/produk/{{.ID}}" class="item-detail-button">Detail</a>
+          </div>
+          <div class="product-image">
+            <img src="{{.ImageName}}" class="gambar">
+          </div>
+          <div class="product-content">
+            <h3>{{.Name}}</h3>
+            <div class="product-price">{{.PriceIDR}}</div>
+            <p>Stok : {{.Stock}}</p>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    <!-- Prduk selesai -->
+
+    <!-- footer mulai -->
+      <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+     <!-- footer selesai -->
+
+     <!-- modal box detail item mulai -->
+      <div class="modal" id="item-detail-modal">
+        <div class="modal-container">
+          <a href="#" class="close-icon"><i data-feather="x"></i></a>
+          <div class="modal-content">
+            <img src="../images/pupuk.jpg" alt="Product 1">
+            <div class="product-content">
+              <h3>Product 1</h3>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, tenetur cupiditate facilis obcaecati
+                ullam maiores minima quos perspiciatis similique itaque, esse rerum eius repellendus voluptatibus!</p>
+              <div class="product-price">IDR 30K <span>IDR 55K</span></div>
+              <a href="#"><i data-feather="shopping-cart"></i> <span>tambahkan ke keranjang </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal box detail item selsai -->
+    <script>
+      feather.replace();
+      async function addToCart(element) {
+          const productId = element.dataset.id;
+
+          const response = await fetch("/produk/addCart", {
+              method: "POST",
+              credentials: "include",  
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                  product_id: parseInt(productId),
+                  quantity: 1
+              }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+              // Update jumlah keranjang di navbar
+              const cartCountEl = document.getElementById("cart-count");
+              cartCountEl.textContent = result.cart_count;
+
+              // Tambah efek animasi kecil biar keren
+              cartCountEl.classList.add("animate-bounce");
+              setTimeout(() => cartCountEl.classList.remove("animate-bounce"), 500);
+          } else {
+              alert(result.error || "Gagal menambahkan produk");
+          }
+      }
+    </script>
+    <script src="/js/indexScrip.js"></script>
+  </body>
+  <!-- feather icons  -->
+  
+</html>
+
+  <!-- javscript -->

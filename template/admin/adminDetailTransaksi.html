@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- navbar mulai -->
+     <nav class="navbar">
+      <a href="/dasboardAdmin" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="/dasboardAdmin">Home</a>
+        <a href="/dasboardAdmin#user">User</a>
+        <a href="/produkAdmin">Produk</a>
+        <a href="/produkAdmin/Transaksi">transaksi</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        <a href="#" id="Shopping-cart"> <i data-feather="shopping-cart"></i></a>
+        {{ else }}
+        <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar selesai -->
+
+    <!-- lihat detai transaksi  -->
+       <section class="keranjang">
+      <h2>Keranjang</h2>
+      <div class="alamat">
+        <h3>Nama Pelanggan : <Span style="color:green;">{{ .nama.Name }}</Span> </h3><br>
+        <p><span>Alamat :</span> Provinsi {{.nama.Addres.Provinsi}}, Kabupaten {{.nama.Addres.Kabupaten}}, Kecamatan {{.nama.Addres.Kecamatan}}, Desa  {{.nama.Addres.Desa}}, jalan {{.nama.Addres.Jalan}}, Rt {{.nama.Addres.Rt}}, Rw {{.nama.Addres.Rw}} No rumah:  {{.nama.Addres.NoRm}}, 
+          Kode Pos: {{.nama.Addres.KodePos}} , Detail deskripsi : {{.nama.Addres.Deskripsi}}</p>
+        <Br></Br>
+        <P><Span>No HP :</Span> {{ .nama.Phone }} </P>
+        <Br>
+        <P><Span>Tanggal Pemesanan :</Span> {{ .tgl }} </P>
+      </div>
+
+      <div class="shoppingCart">
+        {{ range .Detail }}
+        <div class="cartItem">
+          <img src="/{{ .Image }}" alt="Product 1">
+          <div class="itemDetail">
+            <h3>{{ .ProdukName }}</h3>
+            <div class="itemPrice">
+             Rp {{.Price }}
+            </div>  
+          </div>
+          <div class="kali">x</div>
+          <div >{{ .Quantity }}</div>
+          <div>&equals;</div>
+          <div>{{ .PriceIDR }}</div>
+        </div>
+        {{ end }}
+        <div class="total"><h3>Total = </h3> {{ .total }}</div>
+      </div>
+      
+    </section>
+    <!-- selesai lihat transaksi  -->
+
+    <!-- footer mulai -->
+      <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+     <!-- footer selesai -->
+  </body>
+  <!-- feather icons  -->
+  <script>
+    feather.replace();
+  </script>
+<script src="/js/indexScrip.js"></script>
+</html>
+
+  <!-- javscript -->

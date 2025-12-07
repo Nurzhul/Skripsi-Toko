@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani - Daftar</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <link rel="stylesheet" href="/css/register.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form" action="/profile/password" method="POST">
+        <h2>Ganti password</h2>
+        {{ if .error }}
+        <div class="error-message" style="color: red">
+          <i data-feather="alert-circle"></i> {{ .error }}
+        </div>
+        {{ end }}
+        <input
+          type="password"
+          name="old_password"
+          placeholder="Password lama"
+          required
+          autocomplete="new-password"
+          id="password"
+        />
+        <input
+          type="password"
+          name="new_password"
+          placeholder="Password baru panjang min 8"
+          required
+          autocomplete="new-password"
+          id="new-password"
+        />
+        <input
+          type="password"
+          name="comfirm_password"
+          placeholder="ulangin Password baru"
+          required
+          autocomplete="new-password"
+          id="comfirm-password"
+        />
+        <input type="checkbox" onclick="togglePassword()" /> Tampilkan Password
+        <button type="submit" class="daftar-btn">Save</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    function togglePassword() {
+      const fields = ["old-password", "new-password", "confirm-password"];
+      fields.forEach(function (id) {
+        const input = document.getElementById(id);
+        if (input) {
+          input.type = input.type === "password" ? "text" : "password";
+        }
+      });
+    }
+  </script>
+</html>

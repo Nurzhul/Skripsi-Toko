@@ -1,0 +1,245 @@
+:root {
+  --primary: #8fbc8f;
+  --bg: #fff8dc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+/* Navbar selesai */
+
+/* Profile mulai */
+.profile-container {
+  background-color: var(--primary);
+  padding: 30px 7%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  margin-top: 10rem;
+  margin-bottom: 8rem;
+  justify-content: center;
+}
+
+.profile-container .profile {
+  margin: 10rem;
+  margin-top: 5rem;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+.profile-picture-wrapper:hover {
+  border-color: #007bff;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.uploadOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 5%;
+}
+
+.profile-picture-wrapper:hover .upload-overlay {
+  opacity: 1;
+}
+
+.foto-produk:hover .uploadOverlay {
+  opacity: 1;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.profile-name {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+  color: black;
+  border-bottom: 3px solid #eee;
+}
+
+.profile-details {
+  text-align: left;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.produk-detail {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.profile-details p {
+  margin: 8px 0;
+}
+
+.profile-details strong {
+  color: black;
+  margin-right: 5px;
+  border-bottom: 3px solid #eee;
+}
+
+.profile-details a {
+  color: blue;
+}
+
+.profile-details a:hover {
+  color: red;
+}
+
+.alamat-detail {
+  margin-top: 3rem;
+}
+
+.alamat-detail p {
+  max-width: 23rem;
+}
+
+.produk-form input {
+  width: 80%;
+  padding: 12px 7%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.daftar-btn {
+  width: 80%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+}
+
+/* Media responsif(queries) */
+
+/* Responsif Laptop */
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+/* Responsif Tablet */
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+
+  #menu {
+    display: inline-block;
+  }
+
+  .navbar .navbar-nav {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    background-color: #bdb76b;
+    width: 30rem;
+    height: 100vh;
+    transition: 0.3s;
+  }
+
+  .navbar .navbar-nav.active {
+    right: 0;
+  }
+
+  .navbar .navbar-nav a {
+    color: white;
+    display: block;
+    margin: 1.5rem;
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+
+  .navbar .navbar-nav a:hover {
+    color: green;
+  }
+
+  .navbar .navbar-nav a::after {
+    border-bottom: 0.1rem solid green;
+    transform-origin: 0 0;
+  }
+
+  .navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.5);
+  }
+
+  /* Profile */
+  .profile-container,
+  .produk-container {
+    display: block;
+  }
+
+  .profile {
+    margin-right: 0;
+  }
+  .foto-produk {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+/* Responsif Mobile */
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+}

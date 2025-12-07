@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="../asset/css/style.css" />
+  </head>
+  <body>
+    <!-- mulai Navbar  -->
+    <nav class="navbar">
+      <a href="/dasboard" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="/dasboard">Home</a>
+        <a href="/dasboard#about">Tentang Kami</a>
+        <a href="/produk">Produk</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="/{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/profile">Profile</a>
+            <a href="/produk/transaction">Transaksi</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        <a href="/produk/Keranjang" id="shopping-cart-button"> 
+          <i data-feather="shopping-cart"></i>
+          <span class="quantity-badge" id="cart-count">0</span>
+        </a>
+        {{ else }}
+        <a href="/login" class="login-link">Login</a>
+        <a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- selesai Navbar -->
+   
+    <!-- cara pembayara  -->
+     <section id="about" class="about">
+      <h2><span>Cara Pembayaran</span> </h2>
+      <div class="tran">
+        <h3><span>Metode </span> Transfer</h3>
+        <p><br>
+          Transfer ke no rekening <span>BRI</span>  ini -> <span>8149 0100 6353 530 </span>> atas nama Romi Puji raharjo
+          <br>Kemudian Jangan lupa Beri catatan <span>id order dan alamat email</span>  yang terdaftar seperti contoh pada gambar di bawah ini <br>
+          <a href=""></a>
+        </p>
+        <p><br>
+          Setelah melakukan Transfer lakukan konfirmasi ke nomer WA dengan mengetikan seperti pada gambar dibawah ini
+          <br>
+        </p>
+        <p>
+          Setelah Pesanan di Konfirmasi dengan di balas <span>order telah di konfirmasi</span> maka pada status pembayaran, akan berubah menjadi <span>Lunas</span> dan ,
+          status barang akan dikemas.<br><br>
+          jika dalam waktu 1 x 24 jam status pada pembayaran Transfer belum  berubah silakan menghubungin nomer WA lagi
+        </p><br><br>
+      </div>
+
+      <div class="tran">
+        <h3><span>Metode </span> COD</h3>
+        <p><br>
+          Jika melakukan pembayaran dengan COD maka Tunggu sampai <span>status barang berubah</span> menjadi <Span>dikemas </Span> ,
+          jika dalam 1 x 24 jam status barang belum berubah silakan konfirmasi melalui WA seperti pada contoh gambar dibawah 
+          <a href=""></a>
+        </p>
+      </div>
+    </section>
+   <!-- carapembayaran selesai -->
+     <!-- Alamat map mulai -->
+      <section class="addres">
+         <h2><span>Lokasi</span> Kami</h2>
+         <div class="row">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3987.0391714119855!2d102.44784277496764!3d-2.1386621978422924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMsKwMDgnMTkuMiJTIDEwMsKwMjcnMDEuNSJF!5e0!3m2!1sen!2sid!4v1749028125469!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+           <p>Provinsi : <span>Jambi</span>, Kabupaten : <span>Merangin</span>, Kecamatan : <span>Pamenang</span>, Desa : <span>Sialang</span></p>
+         </div>
+      </section>
+      <!-- Alamat Map selesai -->
+    <!-- Footer Mulai -->
+    <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+    <!-- Footer selesai -->
+  </body>
+
+  <!-- feather icons  -->
+   <script>
+    feather.replace();
+  </script>
+  <script src="/js/indexScrip.js"></script>
+</html>

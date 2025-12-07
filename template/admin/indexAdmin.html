@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- mulai Navbar  -->
+    <nav class="navbar">
+      <a href="#" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#user">User</a>
+        <a href="/produkAdmin">Produk</a>
+        <a href="/produkAdmin/Transaksi">transaksi</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="navbar-eks">
+        {{ if .isLoggedIn }}
+        <div class="navbar-user-dropdown">
+          <a href="#" class="navbar-user" onclick="toggleDropdown()">
+           <img src="{{ .avatar }}" alt="User" />
+        {{ .user.Name }}
+      </a>
+          <div class="dropdown-menu" id="userDropdown">
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+        <!-- <a href="#" id="Shopping-cart"> <i data-feather="shopping-cart"></i></a> -->
+        {{ else }}
+        <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
+        {{ end }}
+        
+        <a href="#" id="menu"> <i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- selesai Navbar -->
+    <!-- Hero section mulai -->
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>Toko Pertanian</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
+          temporibus.
+        </p>
+      </main>
+    </section>
+    <!-- Hero section selesai -->
+
+    <!-- tabel user mulai -->
+     <section id="user" class="tabel-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>avatar</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th class="alamat">Alamat</th>
+                    <th class="alamat">Deskripsi</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .users }}
+                <tr>
+                    <td>
+                      {{ if .Avatar }}
+                        <img class="avatar" src="{{ .Avatar }}" width="60">
+                      {{ else }}
+                        <img class="avatar" src="/images/avatar/avatar.jpg" width="60">
+                      {{ end }}
+                    </td>
+                    <td>{{.Name}}</td>
+                    <td>{{.Email}}</td>
+                    <td>{{.Phone}}</td>
+                    <td>Profinsi: {{.Addres.Provinsi}}, 
+                      kabupaten :{{.Addres.Kabupaten}}, 
+                      kecamatan :{{.Addres.Kecamatan}}, 
+                      Desa :{{.Addres.Desa}}, 
+                      jalan :{{.Addres.Jalan}}, 
+                      Rt :{{.Addres.Rt}}, 
+                      Rw :{{.Addres.Rw}}, 
+                      No Rumah : {{.Addres.NoRm}}, 
+                      Kode pos :{{.Addres.KodePos}}</td>
+                    <td>{{.Addres.Deskripsi}}</td>
+                    <td></td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+     </section>
+     <!-- table user selesai -->
+     <!-- Alamat map mulai -->
+      <section class="addres">
+         <h2><span>Lokasi</span> Kami</h2>
+         <div class="row">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3987.0391714119855!2d102.44784277496764!3d-2.1386621978422924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMsKwMDgnMTkuMiJTIDEwMsKwMjcnMDEuNSJF!5e0!3m2!1sen!2sid!4v1749028125469!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+           <p>Provinsi : <span>Jambi</span>, Kabupaten : <span>Merangin</span>, Kecamatan : <span>Pamenang</span>, Desa : <span>Sialang</span></p>
+         </div>
+      </section>
+      <!-- Alamat Map selesai -->
+    <!-- Footer Mulai -->
+    <footer>
+      <div class="sosial">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="x"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="contact" id="contact">
+        <h4><i data-feather="mail">:</i></a> : hs-tani@gmail.com</h4>
+        <h4><i data-feather="phone"></i>wa : 0821 xxxx xxxx</h4>
+      </div>
+    </footer>
+    <!-- Footer selesai -->
+  </body>
+
+  <!-- feather icons  -->
+   <script>
+    feather.replace();
+  </script>
+
+  <script src="/js/indexScrip.js"></script>
+
+</html>
+
+

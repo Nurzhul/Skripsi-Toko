@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <!-- profile mulai -->
+    <form
+      class="produk-form"
+      action="/produkAdmin/updateProduk/{{.produk.ID}}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="produk-container">
+        <div class="profile">
+          <input
+            type="file"
+            id="profileImageInput"
+            name="image"
+            accept="image/*"
+            style="display: none"
+          />
+          <div
+            class="foto-produk"
+            onclick="document.getElementById('profileImageInput').click()"
+          >
+            <img
+              src="../images/alat.jpg"
+              alt="Profile Picture"
+              class="profile-picture"
+              id="profilePicture"
+            />
+            <div class="uploadOverlay">
+              <span>Upload foto</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="produk-detail">
+          {{ if .error }}
+          <div class="error-message" style="color: red">
+            <i data-feather="alert-circle"></i> {{ .error }}
+          </div>
+          {{ end }}<br />
+
+          <input type="text" name="name" placeholder="{{.produk.Name}}" />
+          <input
+            type="text"
+            name="description"
+            placeholder="{{.produk.Description}}"
+          />
+          <input
+            type="text"
+            name="category"
+            placeholder="{{.produk.Category}}"
+          />
+          <input type="text" name="stock" placeholder="{{.produk.Stock}}" />
+          <input type="text" name="price" placeholder="{{.produk.Price}}" />
+
+          <button type="submit" class="daftar-btn">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- profile selesai -->
+
+    <!-- feather icons -->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- javascript -->
+    <script src="/js/indexScrip.js"></script>
+    <script>
+      document
+        .getElementById("profileImageInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const preview = document.getElementById("profilePicture");
+            preview.src = URL.createObjectURL(file);
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani - Daftar</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <link rel="stylesheet" href="/css/register.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form" action="/profile/addres" method="POST">
+        <h2>Alamat</h2>
+        {{ if .error }}
+        <div class="error-message" style="color: red">
+          <i data-feather="alert-circle"></i> {{ .error }}
+        </div>
+        {{ end }}
+        <input
+          type="text"
+          name="provinsi"
+          placeholder="Provinsi"
+          required
+          autocomplete="address-level1"
+        />
+        <input
+          type="text"
+          name="kabupaten"
+          placeholder="Kabupaten"
+          required
+          autocomplete="address-level2"
+        />
+        <input
+          type="text"
+          name="kecamatan"
+          placeholder="Kecamatan"
+          required
+          autocomplete="address-level3"
+        />
+        <input
+          type="text"
+          name="desa"
+          placeholder="Desa"
+          required
+          autocomplete="address-level4"
+        />
+        <input
+          type="text"
+          name="jalan"
+          placeholder="Jalan"
+          required
+          autocomplete="address-line1"
+        />
+        <input
+          type="text"
+          name="rt"
+          placeholder="Rt"
+          required
+          autocomplete="address-level5"
+        />
+        <input
+          type="text"
+          name="rw"
+          placeholder="Rw"
+          required
+          autocomplete="address-level6"
+        />
+        <input
+          type="text"
+          name="no_rm"
+          placeholder="Nomer Rumah"
+          required
+          autocomplete="address-level7"
+        />
+        <input
+          type="text"
+          name="kode_pos"
+          placeholder="Kode POS"
+          required
+          autocomplete="address-level8"
+        />
+        <input
+          type="text"
+          name="deskripsi"
+          placeholder="Deskripsi"
+          required
+          autocomplete="address-level9"
+        />
+        <button type="submit" class="daftar-btn">Save</button>
+      </form>
+    </div>
+  </body>
+</html>

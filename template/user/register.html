@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hz Tani - Daftar</title>
+    <link rel="icon" type="image/png" href="../images/log.png" />
+    <link rel="stylesheet" href="/css/register.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form" action="/register" method="POST">
+        <h2>Daftar</h2>
+        {{ if .emailError }}
+        <div style="color: red">
+          <ul>
+            <li>{{ .emailError }}</li>
+          </ul>
+        </div>
+        {{ end }} {{ if .errors }}
+        <div style="color: red">
+          <ul>
+            {{ range .errors }}
+            <li>
+              {{ .Field }}: {{ .Tag }}{{ if eq .Tag "min" }} (minimal panjang {{
+              .Param }}){{ end }}
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+        <input
+          type="text"
+          name="name"
+          placeholder="Username"
+          required
+          autocomplete="name"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          autocomplete="email"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password min 8 karakter"
+          required
+          autocomplete="new-password"
+          id="password"
+        />
+        <input
+          type="text"
+          name="phone"
+          pattern="[0-9]{10,13}"
+          placeholder="Nomer Hp"
+          required
+          autocomplete="tel"
+        />
+        <input type="checkbox" onclick="togglePassword()" /> Tampilkan Password
+        <button type="submit" class="daftar-btn">Daftar</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+  </script>
+</html>
