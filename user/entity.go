@@ -3,7 +3,7 @@ package user
 import "time"
 
 type User struct {
-	ID           int		`gorm:"primaryKey;autoIncrement"`
+	ID           int		`gorm:"primaryKey;autoIncrement;unsigned"`
 	Name         string		`gorm:"size:255"`
 	PasswordHash string		`gorm:"size:255"`
 	Email        string		`gorm:"size:255"`
@@ -17,8 +17,8 @@ type User struct {
 
 
 type Addres struct{
-	ID 			int		`gorm:"primaryKey;autoIncrement"`
-	UserID		int		`gorm:"not null"`
+	ID 			int		`gorm:"primaryKey;autoIncrement;unsigned"`
+	UserID		int		`gorm:"not null;unsigned"`
 	Provinsi 	string	`gorm:"size:100"`
 	Kabupaten 	string	`gorm:"size:100"`
 	Kecamatan 	string	`gorm:"size:100"`
