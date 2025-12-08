@@ -7,7 +7,7 @@ import (
 )
 
 type Order struct {
-	ID          	int		`gorm:"primaryKey;autoIncrement;unsigned"`
+	ID          	int		`gorm:"primaryKey;autoIncrement"`
 	UserID     	 	int
 	TotalPrice 		int
 	Status      	string	`gorm:"size:50"`
@@ -19,8 +19,8 @@ type Order struct {
 
 
 type DetailOrder struct {
-	ID 			int		`gorm:"primaryKey;autoIncrement;unsigned"`
-	OrderID 	int		`gorm:"not null;unsigned"`
+	ID 			int		`gorm:"primaryKey;autoIncrement"`
+	OrderID 	int		`gorm:"not null;"`
 	ProdukID	int
 	ProdukName 	string	`gorm:"size:255"`
 	Image 		string	`gorm:"size:255"`

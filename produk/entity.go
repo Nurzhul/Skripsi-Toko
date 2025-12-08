@@ -7,7 +7,7 @@ import (
 )
 
 type Produk struct {
-	ID          int		`gorm:"primaryKey;autoIncrement;unsigned"`
+	ID          int		`gorm:"primaryKey;autoIncrement"`
 	Name        string	`gorm:"size:150"`
 	ImageName 	string	`gorm:"size:255"`
 	Description string	`gorm:"type:text"`

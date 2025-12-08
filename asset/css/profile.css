@@ -226,8 +226,8 @@ body {
 }
 .foto-produk {
   position: relative;
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
   margin: 0 auto 20px;
   border-radius: 5%;
   overflow: hidden;

@@ -15,10 +15,6 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-
-	orderEntity "toko/order"
-	produkEntity "toko/produk"
-	userEntity "toko/user"
 )
 
 func main() {
@@ -37,17 +33,17 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = db.AutoMigrate(
-		&userEntity.User{},
-		&userEntity.Addres{},
-		&produkEntity.Produk{},
-		&orderEntity.Order{},
-		&orderEntity.DetailOrder{},
-	)
+	// err = db.AutoMigrate(
+	// 	&userEntity.User{},
+	// 	&userEntity.Addres{},
+	// 	&produkEntity.Produk{},
+	// 	&orderEntity.Order{},
+	// 	&orderEntity.DetailOrder{},
+	// )
 	
-	if err != nil {
-        log.Fatal("Gagal migrate: ", err)
-    }
+	// if err != nil {
+    //     log.Fatal("Gagal migrate: ", err)
+    // }
 
 
 	userRepository := user.NewRepository(db)
