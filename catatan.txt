@@ -22,3 +22,11 @@ ________________________________________________________________________________
 -pertanyaan apa perbedaan desain rekayasa perangkat  dan metode pengembangan perangkat 
 
 - pelajari apa itu restAPI dan HTTP  lagi 
+-----------------------------------------------------------------------------------------------------------------
+Interface UserRepository berfungsi sebagai kontrak abstraksi
+apa maksut ddari kalimat diatas yang menjelaskan tentang repository pada golang
+
+- Interface di Go adalah kumpulan definisi method tanpa implementasi.
+- UserRepository adalah nama interface yang biasanya dipakai untuk mengelola data User (misalnya simpan, ambil, hapus).
+- Disebut kontrak abstraksi karena interface hanya mendefinisikan apa yang harus dilakukan, bukan bagaimana cara melakukannya.
+_______________________________________________________________________________________________________________________________

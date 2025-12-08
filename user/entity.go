@@ -11,14 +11,14 @@ type User struct {
 	Avatar       string		`gorm:"size:255"`
 	Role         string		`gorm:"size:10"`
 	CreatedAt    time.Time	`gorm:"autoCreateTime"`
-	UpdatedAt    time.Time	`gorm:"autoCreateTime"`
-	Addres		 Addres
+	UpdatedAt    time.Time	`gorm:"autoUpdateTime"`
+	Addres		 Addres		`gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE"`
 }
 
 
 type Addres struct{
 	ID 			int		`gorm:"primaryKey;autoIncrement"`
-	UserID		int		
+	UserID		int		`gorm:"not null"`
 	Provinsi 	string	`gorm:"size:100"`
 	Kabupaten 	string	`gorm:"size:100"`
 	Kecamatan 	string	`gorm:"size:100"`

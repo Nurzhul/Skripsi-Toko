@@ -14,13 +14,13 @@ type Order struct {
 	StatusPayment 	string	`gorm:"size:50"`
 	Pengambilan		string	`gorm:"size:50"`
 	CreatedAt   	time.Time	`gorm:"autoCreateTime"`
-	Detail    		[]DetailOrder
+	Detail    		[]DetailOrder `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE"`
 }
 
 
 type DetailOrder struct {
 	ID 			int		`gorm:"primaryKey;autoIncrement"`
-	OrderID 	int
+	OrderID 	int		`gorm:"not null"`
 	ProdukID	int
 	ProdukName 	string	`gorm:"size:255"`
 	Image 		string	`gorm:"size:255"`
