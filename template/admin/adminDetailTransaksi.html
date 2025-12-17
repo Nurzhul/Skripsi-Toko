@@ -39,7 +39,7 @@
             <a href="/logout">Logout</a>
           </div>
         </div>
-        <a href="#" id="Shopping-cart"> <i data-feather="shopping-cart"></i></a>
+       
         {{ else }}
         <a href="/login" class="login-link">Login</a><a href="/register" class="login-link">/ register</a>
         {{ end }}
@@ -51,7 +51,7 @@
 
     <!-- lihat detai transaksi  -->
        <section class="keranjang">
-      <h2>Keranjang</h2>
+      <h2>Detail pesanan</h2>
       <div class="alamat">
         <h3>Nama Pelanggan : <Span style="color:green;">{{ .nama.Name }}</Span> </h3><br>
         <p><span>Alamat :</span> Provinsi {{.nama.Addres.Provinsi}}, Kabupaten {{.nama.Addres.Kabupaten}}, Kecamatan {{.nama.Addres.Kecamatan}}, Desa  {{.nama.Addres.Desa}}, jalan {{.nama.Addres.Jalan}}, Rt {{.nama.Addres.Rt}}, Rw {{.nama.Addres.Rw}} No rumah:  {{.nama.Addres.NoRm}}, 
