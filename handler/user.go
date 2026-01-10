@@ -1139,3 +1139,44 @@ func (h *userHandler) DetailTransaction(c *gin.Context){
 		"tanggal": order.CreatedAt,
 	})
 }
+
+func (h *userHandler) Carapay( c *gin.Context){
+	session := sessions.Default(c)
+	userID := session.Get("userID")
+
+	if userID == nil {
+		c.Redirect(http.StatusFound, "/login")
+		return
+	}
+
+	id, ok := userID.(int)
+	if !ok {
+		c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+			"code":    500,
+			"message": "ID pengguna tidak valid",
+			"title":   "Profile Akses Ditolak",
+		})
+		return
+	}
+
+	user, err := h.userService.GetUserByID(id)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError,"error.html", gin.H{
+			"code":    500,
+			"message":"Gagal memuat user",
+			"title":   "Profile 1",
+		})
+		return
+	}
+
+	avatar := user.Avatar
+	if  avatar ==""{
+		avatar = "/images/avatar/avatar.jpg"
+	}
+
+	c.HTML(http.StatusOK,"caraPay.html", gin.H{
+		"user":user,
+		"avatar": avatar,
+		"isLoggedIn": true,
+	})
+}

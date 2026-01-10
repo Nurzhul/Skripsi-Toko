@@ -25,6 +25,7 @@
         <a href="/dasboard">Home</a>
         <a href="/dasboard#about">Tentang Kami</a>
         <a href="/produk">Produk</a>
+        <a href="/produk/transaction">Transaksi</a>
         <a href="#contact">Kontak</a>
       </div>
       <div class="navbar-eks">
@@ -36,7 +37,6 @@
       </a>
           <div class="dropdown-menu" id="userDropdown">
             <a href="/profile">Profile</a>
-            <a href="/produk/transaction">Transaksi</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
@@ -63,7 +63,8 @@
           <a href="/produk/transaction?status=Dikemas" class="btn-kategori">Dikemas</a>
           <a href="/produk/transaction?status=Diantar" class="btn-kategori">Diantar</a>
           <a href="/produk/transaction?status=Diproses" class="btn-kategori">Diproses</a>
-          <a href="" class="btn-kategori">Cara Pembayaran</a>
+          <a href="/produk/transaction?status=Dikomfirmasi" class="btn-kategori">Dikonfirmasi</a>
+          <a href="/produk/transaction/cara" class="btn-kategori">Cara Pembayaran</a>
       </div>
       <br>
         {{ if .statuskey }}

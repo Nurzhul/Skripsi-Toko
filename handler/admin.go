@@ -708,3 +708,139 @@ func (h *adminHandler) GetDetailTransaction(c *gin.Context){
 		"total" : order.TotPriceIDR(),
 	})
 }
+
+func (h *adminHandler) GetDetailUser(c *gin.Context){
+	session := sessions.Default(c)
+	userID:= session.Get("userID")
+	admin := session.Get("userRole")
+
+	if admin == nil {
+		c.Redirect(http.StatusFound, "/login")
+		return
+	}
+	
+	if userID == nil {
+		c.Redirect(http.StatusFound, "/login")
+		return
+	}
+
+	id, ok := userID.(int)
+	if !ok {
+		c.HTML(http.StatusBadRequest, "error2.html", gin.H{
+			"code":    500,
+			"message": "ID pengguna tidak valid",
+			"title":   "Password Akses Ditolak",
+		})
+		return
+	}
+
+	ser, err :=h.userService.GetUserByID(id)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError,"error2.html", gin.H{
+			"code":    500,
+			"message":"Gagal memuat user",
+			"title":   "index 1",
+		})
+		return
+	}
+	avatar := ser.Avatar
+	if  avatar ==""{
+		avatar = "/images/avatar/avatar.jpg"
+	}
+
+	var uri user.UserUri
+	err = c.ShouldBindUri(&uri)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error2.html", gin.H{
+			"code":    500,
+			"message": "ID user tidak valid",
+			"title":   "input param id produk error",
+		})
+		return
+	}
+
+	getuser, err := h.userService.GetDetailUser(uri)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError,"error2.html", gin.H{
+			"code":    500,
+			"message":"Gagal memuat user detail",
+			"title":   "get user Detail error",
+		})
+		return
+	}
+
+	c.HTML(http.StatusOK,"userDetail.html", gin.H{
+		"users":getuser,
+		"isLoggedIn": true,
+		"user":ser,
+		"avatar": avatar,
+	})
+}
+
+func ( h *adminHandler) DetailProduk(c *gin.Context){
+	session := sessions.Default(c)
+	userID:= session.Get("userID")
+	admin := session.Get("userRole")
+
+	if admin == nil {
+		c.Redirect(http.StatusFound, "/login")
+		return
+	}
+	
+	if userID == nil {
+		c.Redirect(http.StatusFound, "/login")
+		return
+	}
+
+	id, ok := userID.(int)
+	if !ok {
+		c.HTML(http.StatusBadRequest, "error2.html", gin.H{
+			"code":    500,
+			"message": "ID pengguna tidak valid",
+			"title":   "Password Akses Ditolak",
+		})
+		return
+	}
+
+	user, err :=h.userService.GetUserByID(id)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError,"error2.html", gin.H{
+			"code":    500,
+			"message":"Gagal memuat user",
+			"title":   "index 1",
+		})
+		return
+	}
+	avatar := user.Avatar
+	if  avatar ==""{
+		avatar = "/images/avatar/avatar.jpg"
+	}
+
+	var uri produk.GetProdukUri
+	err = c.ShouldBindUri(&uri) 
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error2.html", gin.H{
+			"code":    500,
+			"message": "ID barang tidak valid",
+			"title":   "input param id produk error",
+		})
+		return
+	}
+	getproduk , err := h.produkService.GetProdukById(uri)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError,"error2.html", gin.H{
+			"code":    500,
+			"message":"Gagal memuat produk",
+			"title":   "get produk error",
+		})
+		return
+	}
+
+	c.HTML(http.StatusOK,"updateProduk.html", gin.H{
+		"produk":getproduk,
+		"user":user,
+		"avatar": avatar,
+		"isLoggedIn": true,
+	})
+
+}

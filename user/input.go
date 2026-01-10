@@ -37,3 +37,7 @@ type InputAddres struct {
 	KodePos   string `form:"kode_pos" binding:"required"`
 	Deskripsi string `form:"deskripsi" binding:"required"`
 }
+
+type UserUri struct {
+	ID int `uri:"id" binding:"required"`
+}

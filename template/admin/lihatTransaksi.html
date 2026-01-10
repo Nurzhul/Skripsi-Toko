@@ -60,6 +60,7 @@
           <a href="/produkAdmin/Transaksi?status=Dikemas" class="btn-kategori">Dikemas</a>
           <a href="/produkAdmin/Transaksi?status=Diantar" class="btn-kategori">Diantar</a>
           <a href="/produkAdmin/Transaksi?status=Diproses" class="btn-kategori">Diproses</a>
+            <a href="/produkAdmin/Transaksi?status=Dikonfirmasi" class="btn-kategori">Dikonfirmasi</a>
       </div>
       <br>
         {{ if .statuskey }}
@@ -123,6 +124,7 @@
               <option value="Dikemas">Dikemas</option>
               <option value="Diantar">Diantar</option>
               <option value="Selesai">Selesai</option>
+              <option value="dikonfirmasi">dikonfirmasi</option>
             </select>
             <button type="submit">Simpan</button>
           </form>
@@ -136,7 +138,6 @@
           <form id="statusPayForm" method="post" class="editpop">
             <label for="status">Status pembayaran</label>
             <select id="status_payment" name="status_payment">
-              <option value="COD">COD</option>
               <option value="Menunggu">Menunggu</option>
               <option value="Lunas">Lunas</option>
             </select>

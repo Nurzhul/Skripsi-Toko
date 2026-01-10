@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hz Tani</title>
     <link rel="icon" type="image/png" href="../images/log.png" />
-    <link rel="stylesheet" href="/css/profile.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,19 +14,20 @@
     />
     <!-- feather icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
   </head>
   <body>
     <!-- mulai Navbar  -->
     <nav class="navbar">
-      <a href="/dasboard" class="navbar-logo"
-        ><img src="../images/log.png" />Hs Tani</a
-      >
+      <a href="#" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
       <div class="navbar-nav">
-        <a href="/dasboard">Home</a>
-        <a href="/dasboard#about">Tentang Kami</a>
-        <a href="/produk">Produk</a>
-        <a href="/produk/transaction">Transaksi</a>
-        <a href="/dasboard#contact">Kontak</a>
+        <a href="/dasboardAdmin">Home</a>
+        <a href="/dasboardAdmin#user">User</a>
+        <a href="/produkAdmin">Produk</a>
+        <a href="/produkAdmin/Transaksi">transaksi</a>
+        <a href="#contact">Kontak</a>
       </div>
       <div class="navbar-eks">
         {{ if .isLoggedIn }}
@@ -37,14 +37,10 @@
             {{ .user.Name }}
           </a>
           <div class="dropdown-menu" id="userDropdown">
-            <a href="/profile">Profile</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
-        <a href="/produk/Keranjang" id="shopping-cart-button">
-          <i data-feather="shopping-cart"></i>
-          <span class="quantity-badge" id="cart-count">0</span>
-        </a>
+        <!-- <a href="#" id="Shopping-cart"> <i data-feather="shopping-cart"></i></a> -->
         {{ else }}
         <a href="/login" class="login-link">Login</a
         ><a href="/register" class="login-link">/ register</a>
@@ -54,7 +50,6 @@
       </div>
     </nav>
     <!-- selesai Navbar -->
-
     <!-- profile mulai -->
     <div class="profile-container">
       <div class="profile">
@@ -69,7 +64,7 @@
           onclick="window.location.href='/profile/saveAvatar'"
         >
           <img
-            src="{{ .avatar }}"
+            src="/{{ .users.Avatar }}"
             alt="User"
             class="profile-picture1"
             id="profilePicture"
@@ -78,7 +73,7 @@
             <span>Ubah Foto</span>
           </div>
         </div>
-        <h2 class="profile-name">{{ .user.Name}}</h2>
+        <h2 class="profile-name">{{ .users.Name}}</h2>
       </div>
 
       <div class="profile-details">
@@ -86,20 +81,18 @@
           <tbody>
             <tr>
               <th>Email</th>
-              <td>: {{.user.Email}}</td>
+              <td>: {{.users.Email}}</td>
             </tr>
             <tr>
               <th>Phone</th>
-              <td>: {{.user.Phone}}</td>
+              <td>: {{.users.Phone}}</td>
             </tr>
             <tr>
               <th>Created At</th>
-              <td>: {{.user.CreatedAt}}</td>
+              <td>: {{.users.CreatedAt}}</td>
             </tr>
           </tbody>
         </table>
-
-        <a href="/profile/password">Ganti password </a>
 
         <div class="alamat-detail">
           <p><strong>Alamat </strong></p>
@@ -107,39 +100,39 @@
             <tbody>
               <tr>
                 <th>Provinsi</th>
-                <td>: {{.user.Addres.Provinsi}}</td>
+                <td>: {{.users.Addres.Provinsi}}</td>
               </tr>
               <tr>
                 <th>Kabupaten</th>
-                <td>: {{.user.Addres.Kabupaten}}</td>
+                <td>: {{.users.Addres.Kabupaten}}</td>
               </tr>
               <tr>
                 <th>Kecamatan</th>
-                <td>: {{.user.Addres.Kecamatan}}</td>
+                <td>: {{.users.Addres.Kecamatan}}</td>
               </tr>
               <tr>
                 <th>Desa</th>
-                <td>: {{.user.Addres.Desa}}</td>
+                <td>: {{.users.Addres.Desa}}</td>
               </tr>
               <tr>
                 <th>Jalan</th>
-                <td>: {{.user.Addres.Jalan}}</td>
+                <td>: {{.users.Addres.Jalan}}</td>
               </tr>
               <tr>
                 <th>Rt</th>
-                <td>:{{.user.Addres.Rt}}</td>
+                <td>:{{.users.Addres.Rt}}</td>
               </tr>
               <tr>
                 <th>Rw</th>
-                <td>: {{.user.Addres.Rw}}</td>
+                <td>: {{.users.Addres.Rw}}</td>
               </tr>
               <tr>
                 <th>No Rumah</th>
-                <td>: {{.user.Addres.NoRm}}</td>
+                <td>: {{.users.Addres.NoRm}}</td>
               </tr>
               <tr>
                 <th>Kode Pos</th>
-                <td>: {{.user.Addres.KodePos}}</td>
+                <td>: {{.users.Addres.KodePos}}</td>
               </tr>
               <tr>
                 <th>Detai Alamat</th>
@@ -147,8 +140,7 @@
               </tr>
             </tbody>
           </table>
-          <p>{{.user.Addres.Deskripsi}}</p>
-          <a href="/profile/addres">Update Alamat </a>
+          <p>{{.users.Addres.Deskripsi}}</p>
         </div>
       </div>
     </div>
@@ -159,18 +151,6 @@
   <script>
     feather.replace();
   </script>
-  <!-- javscript -->
+
   <script src="/js/indexScrip.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    const success = "{{ .success }}";
-    if (success) {
-      Swal.fire({
-        icon: "success",
-        title: success,
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    }
-  </script>
 </html>

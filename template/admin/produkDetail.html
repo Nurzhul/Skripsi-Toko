@@ -6,7 +6,7 @@
     <title>Hz Tani</title>
     <link rel="icon" type="image/png" href="../images/log.png" />
     <link rel="stylesheet" href="/css/profile.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,32 +19,27 @@
   <body>
     <!-- mulai Navbar  -->
     <nav class="navbar">
-      <a href="/dasboard" class="navbar-logo"
+      <a href="/dasboardAdmin" class="navbar-logo"
         ><img src="../images/log.png" />Hs Tani</a
       >
       <div class="navbar-nav">
-        <a href="/dasboard">Home</a>
-        <a href="/dasboard#about">Tentang Kami</a>
-        <a href="/produk">Produk</a>
-        <a href="/produk/transaction">Transaksi</a>
-        <a href="/dasboard#contact">Kontak</a>
+        <a href="/dasboardAdmin">Home</a>
+        <a href="/dasboardAdmin#user">User</a>
+        <a href="/produkAdmin">Produk</a>
+        <a href="/produkAdmin/Transaksi">transaksi</a>
+        <a href="#contact">Kontak</a>
       </div>
       <div class="navbar-eks">
         {{ if .isLoggedIn }}
         <div class="navbar-user-dropdown">
           <a href="#" class="navbar-user" onclick="toggleDropdown()">
-            <img src="/{{ .avatar }}" alt="User" />
+            <img src="{{ .avatar }}" alt="User" />
             {{ .user.Name }}
           </a>
           <div class="dropdown-menu" id="userDropdown">
-            <a href="/profile">Profile</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
-        <a href="/produk/Keranjang" id="shopping-cart-button">
-          <i data-feather="shopping-cart"></i>
-          <span class="quantity-badge" id="cart-count">0</span>
-        </a>
         {{ else }}
         <a href="/login" class="login-link">Login</a
         ><a href="/register" class="login-link">/ register</a>
@@ -95,9 +90,6 @@
           </tbody>
         </table>
         <p>{{.produk.Description}}</p>
-        <a style="cursor: pointer" onclick="addToCart(this)" data-id="{{.ID}}"
-          >Masukan ke keranjang<i data-feather="shopping-cart"></i
-        ></a>
       </div>
     </div>
 
@@ -106,35 +98,6 @@
     <!-- feather icons -->
     <script>
       feather.replace();
-      async function addToCart(element) {
-        const productId = element.dataset.id;
-
-        const response = await fetch("/produk/addCart", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            product_id: parseInt(productId),
-            quantity: 1,
-          }),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          // Update jumlah keranjang di navbar
-          const cartCountEl = document.getElementById("cart-count");
-          cartCountEl.textContent = result.cart_count;
-
-          // Tambah efek animasi kecil biar keren
-          cartCountEl.classList.add("animate-bounce");
-          setTimeout(() => cartCountEl.classList.remove("animate-bounce"), 500);
-        } else {
-          alert(result.error || "Gagal menambahkan produk");
-        }
-      }
     </script>
 
     <!-- javascript -->

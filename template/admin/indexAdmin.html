@@ -61,17 +61,15 @@
     <!-- Hero section selesai -->
 
     <!-- tabel user mulai -->
-     <section id="user" class="tabel-container">
+     <section id="user" class="table-container">
+      <h2><span style="color: green;">Daftar</span> User</h2>
         <table>
             <thead>
                 <tr>
                     <th>avatar</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th class="alamat">Alamat</th>
-                    <th class="alamat">Deskripsi</th>
-                    <th></th>
+                    <th>Detail</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,20 +82,13 @@
                         <img class="avatar" src="/images/avatar/avatar.jpg" width="60">
                       {{ end }}
                     </td>
-                    <td>{{.Name}}</td>
-                    <td>{{.Email}}</td>
-                    <td>{{.Phone}}</td>
-                    <td>Profinsi: {{.Addres.Provinsi}}, 
-                      kabupaten :{{.Addres.Kabupaten}}, 
-                      kecamatan :{{.Addres.Kecamatan}}, 
-                      Desa :{{.Addres.Desa}}, 
-                      jalan :{{.Addres.Jalan}}, 
-                      Rt :{{.Addres.Rt}}, 
-                      Rw :{{.Addres.Rw}}, 
-                      No Rumah : {{.Addres.NoRm}}, 
-                      Kode pos :{{.Addres.KodePos}}</td>
-                    <td>{{.Addres.Deskripsi}}</td>
-                    <td></td>
+                    <td class="long">
+                      <p>{{.Name}}</p>
+                    </td>
+                    <td class="long">
+                      <p>{{.Email}}</p>
+                    </td>
+                    <td style="cursor: pointer;"><a href="/dasboardAdmin/user/{{.ID}}">Detail</a> </td>
                 </tr>
                 {{ end }}
             </tbody>

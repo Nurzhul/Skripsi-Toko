@@ -15,16 +15,17 @@
     <!-- feather icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <link rel="stylesheet" href="../asset/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <!-- mulai Navbar  -->
     <nav class="navbar">
-      <a href="/dasboard" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <a href="/dasboard" class="navbar-logo"><img src="/images/log.png" />Hs Tani</a>
       <div class="navbar-nav">
         <a href="/dasboard">Home</a>
         <a href="/dasboard#about">Tentang Kami</a>
         <a href="/produk">Produk</a>
+        <a href="/produk/transaction">Transaksi</a>
         <a href="#contact">Kontak</a>
       </div>
       <div class="navbar-eks">
@@ -36,7 +37,6 @@
       </a>
           <div class="dropdown-menu" id="userDropdown">
             <a href="/profile">Profile</a>
-            <a href="/produk/transaction">Transaksi</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
@@ -59,29 +59,30 @@
       <h2><span>Cara Pembayaran</span> </h2>
       <div class="tran">
         <h3><span>Metode </span> Transfer</h3>
-        <p><br>
-          Transfer ke no rekening <span>BRI</span>  ini -> <span>8149 0100 6353 530 </span>> atas nama Romi Puji raharjo
-          <br>Kemudian Jangan lupa Beri catatan <span>id order dan alamat email</span>  yang terdaftar seperti contoh pada gambar di bawah ini <br>
-          <a href=""></a>
-        </p>
-        <p><br>
-          Setelah melakukan Transfer lakukan konfirmasi ke nomer WA dengan mengetikan seperti pada gambar dibawah ini
-          <br>
+         <p>
+          pembayaran dilakukan setelah status pesanan telah dikonfirmasi. jika dalam waktu 1 X 24 jam status belum berubah dari 
+          setelah pemesanan maka hubungi WA dengan format pada gambar dibawah ini.<br>
+          <img class="img" src="/images/konfirmasi.jpeg">
         </p>
         <p>
-          Setelah Pesanan di Konfirmasi dengan di balas <span>order telah di konfirmasi</span> maka pada status pembayaran, akan berubah menjadi <span>Lunas</span> dan ,
-          status barang akan dikemas.<br><br>
+          pesana akan dikonfirmasi setelah pesan WA dibalas seperti ini <span>"order telah di konfirmasi"</span> maka staus barang akan
+          berubah menjadi<span>"dikonfirmasi"</span>.<br>
+        </p>
+        <p><br>setelah status nya berubah menjadi <span>"Dikonfirmasi"</span> lakukan pembawayaran dengan melakukan
+          Transfer ke no rekening <span>BRI</span>  ini -> <span>8149 0100 6353 530 </span>> atas nama <span>Romi Puji raharjo</span>
+          Kemudian Jangan lupa Beri catatan <span> order ID</span>  yang terdaftar seperti contoh pada gambar di bawah ini <br>
+          <img class="img" src="/images/catatan.jpeg">
+        </p>
+        <p><br>
+          Setelah melakukan Transfer pembayran, lakukan konfirmasi lagi kembali ke nomer WA dengan format seperti pada gambar dibawah ini
+          <br>
+           <img class="img" src="/images/kon.png">
+        </p>
+        <p>
+          Setelah Konfirmasi pembayaran selesai maka pesan akan dibalas dengan <span>"pembayran Lunas"</span> maka pada status pembayaran, 
+          akan berubah menjadi <span>"Lunas"</span> dan ,status barang berubah menjadi <span>"dikemas"</span>.<br>
           jika dalam waktu 1 x 24 jam status pada pembayaran Transfer belum  berubah silakan menghubungin nomer WA lagi
         </p><br><br>
-      </div>
-
-      <div class="tran">
-        <h3><span>Metode </span> COD</h3>
-        <p><br>
-          Jika melakukan pembayaran dengan COD maka Tunggu sampai <span>status barang berubah</span> menjadi <Span>dikemas </Span> ,
-          jika dalam 1 x 24 jam status barang belum berubah silakan konfirmasi melalui WA seperti pada contoh gambar dibawah 
-          <a href=""></a>
-        </p>
       </div>
     </section>
    <!-- carapembayaran selesai -->

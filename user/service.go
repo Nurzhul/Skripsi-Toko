@@ -13,6 +13,7 @@ type Service interface {
 	Login(input InputLogin) (User , error)
 	SaveAvatar(ID int, fileLocation string) (User, error)
 	GetUserByID(ID int) (User, error)
+	GetDetailUser(input UserUri) (User, error)
 	GetAllUser()([]User, error)
 	UpdateUser(input FromUpdateUser)(User,error)
 	Updatepassword(ID int, input ChangePassword)(User, error)
@@ -95,6 +96,19 @@ func (s *service) SaveAvatar(ID int, fileLocation string )(User, error){
 
 func (s *service) GetUserByID(ID int) (User,error){
 	user, err := s.repository.FindByID(ID)
+	if err != nil {
+		return User{},err
+	}
+
+	if user.ID == 0 {
+		return User{}, errors.New("User Tidak di temukan ")
+	}
+
+	return user,nil
+}
+
+func (s *service) GetDetailUser(input UserUri) (User, error){
+	user, err := s.repository.FindByID(input.ID)
 	if err != nil {
 		return User{},err
 	}

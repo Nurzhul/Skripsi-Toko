@@ -50,7 +50,7 @@
 
     <!-- Produk mulai -->
     
-    <section id="pro" class="tabel-container">
+    <section id="pro" class="table-container">
         <h2>Produk</h2>
         <a href="/produkAdmin/addProduk" class="cta">Tambah Produk</a>
         <br>
@@ -78,12 +78,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>avatar</th>
+                    <th>Gambar</th>
                     <th>Nama</th>
-                    <th>Deskripsi</th>
-                    <th>kategori</th>
-                    <th>stok</th>
-                    <th>Harga</th>
+                    <th>detail</th>
                     <th>Edit</th>
                     <th>Action</th>
                     
@@ -93,11 +90,9 @@
                 {{ range .produks }}
                 <tr>
                     <td><img src="{{.ImageName}}" width="60"></td>
-                    <td>{{.Name}}</td>
-                    <td>{{.Description}}</td>
-                    <td>{{.Category}}</td>
-                    <td>{{.Stock}}</td>
-                    <td>{{.PriceIDR}}</td>
+                    <td class="long">
+                      <P>{{.Name}}</P></td>
+                    <td><a href="/produkAdmin/detail/{{.ID}}">Detail</a> </td>
                     <td><a href="/produkAdmin/updateProduk/{{.ID}}">Edit</a></td>
                     <td><form action="/produkAdmin/deleteProduk/{{.ID}}" method="post" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                         <button type="submit" class="delete-btn">Delete</button>
