@@ -146,7 +146,7 @@ func (h *userHandler) UpdatePass(c *gin.Context){
 	err := c.ShouldBind(&input)
 	if err !=nil {
 		c.HTML(http.StatusBadRequest, "update_pas.html", gin.H{
-			"error":      "Semua kolom harus diisi dan password minimal 8 karakter.",
+			"error":      "panjang password minimal 8 karakter.",
 			"title":      "Ganti Password",
 			"isLoggedIn": true,
 		})
@@ -538,7 +538,7 @@ func (h *userHandler) DetailProduk (c *gin.Context){
 		isLoggedIn = true
 		avatar = user.Avatar
 		if  avatar ==""{
-			avatar = "/images/avatar/avatar.jpg"
+			avatar = "images/avatar/avatar.jpg"
 		}
 	}
 
@@ -892,7 +892,7 @@ func (h *userHandler) IncreaseCartItem(c *gin.Context) {
 		return
 	}
 
-	totalQty, totalPrice :=helper.TotalCart(items)
+	
     for i := range items {
         if items[i].ProductID == itemID {
             items[i].Quantity += 1
@@ -902,6 +902,7 @@ func (h *userHandler) IncreaseCartItem(c *gin.Context) {
    			session.Set("cart", string(updatedCart))
             session.Save()
 			
+			totalQty, totalPrice := helper.TotalCart(items)
             c.JSON(http.StatusOK, gin.H{
                 "message": "Jumlah item bertambah",	
                 "item":    items[i],
@@ -1026,7 +1027,7 @@ func (h *userHandler) ViewTransaction(c *gin.Context){
 
 	avatar := user.Avatar
 	if  avatar ==""{
-		avatar = "/images/avatar/avatar.jpg"
+		avatar = "images/avatar/avatar.jpg"
 	}
 
 	var order []order.Order
@@ -1096,7 +1097,7 @@ func (h *userHandler) DetailTransaction(c *gin.Context){
 
 	avatar := user.Avatar
 	if  avatar ==""{
-		avatar = "/images/avatar/avatar.jpg"
+		avatar = "images/avatar/avatar.jpg"
 	}
 
 	var uri order.UriInputOrderID

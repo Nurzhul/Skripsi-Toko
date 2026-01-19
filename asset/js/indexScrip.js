@@ -89,7 +89,7 @@ async function increaseItem(id) {
   const result = await res.json();
 
   if (res.ok) {
-    updateUI(id, result.itemQuantity, result.itemSubtotal, result.TotalCart);
+    updateUI(id, result.itemQuantity, result.itemSubtotal, result.totalCart);
     const cartCountEl = document.getElementById("cart-count");
     cartCountEl.textContent = result.cart_count;
   }

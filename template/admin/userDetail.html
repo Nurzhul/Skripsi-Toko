@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,7 +21,7 @@
   <body>
     <!-- mulai Navbar  -->
     <nav class="navbar">
-      <a href="#" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <a href="#" class="navbar-logo"><img src="/images/log.png" />Hs Tani</a>
       <div class="navbar-nav">
         <a href="/dasboardAdmin">Home</a>
         <a href="/dasboardAdmin#user">User</a>
@@ -61,10 +61,10 @@
         />
         <div
           class="profile-picture-wrapper"
-          onclick="window.location.href='/profile/saveAvatar'"
+          onclick="window.location.href = '/profile/saveAvatar'"
         >
           <img
-            src="/{{ .users.Avatar }}"
+            src="/{{ .avat }}"
             alt="User"
             class="profile-picture1"
             id="profilePicture"

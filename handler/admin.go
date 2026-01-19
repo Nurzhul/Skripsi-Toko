@@ -360,7 +360,7 @@ func(h *adminHandler) UpdatePostProduk(c *gin.Context){
 	err = c.ShouldBind(&input)
 	if err !=nil {
 		// Jika error-nya bukan karena field kosong (EOF), tampilkan error
-		c.HTML(http.StatusBadRequest, "produkUpdate.html", gin.H{
+		c.HTML(http.StatusBadRequest, "updateProduk.html", gin.H{
 			"error":      "Terjadi kesalahan saat memproses data.",
 			"title":      "Update Produk",
 			"isLoggedIn": true,
@@ -369,29 +369,23 @@ func(h *adminHandler) UpdatePostProduk(c *gin.Context){
 	}
 
 	file , err := c.FormFile("image")
-	if err != nil {
-        c.HTML(http.StatusBadRequest, "produkUpdate.html", gin.H{
-            "error":      "Gambar harus dipilih.",
-            "title":      "add produk",
-            "isLoggedIn": true,
-        })
-        return
+	if err == nil {
+       idPlus := uri
+	
+		imagePath :=fmt.Sprintf("images/produk/%d-%s", idPlus ,file.Filename)
+		err = c.SaveUploadedFile(file,imagePath)
+		if err != nil {
+			c.HTML(http.StatusInternalServerError, "error2.html", gin.H{
+				"error":      "Gagal menyimpan gambar.",
+				"title":      "add produk",
+				"isLoggedIn": true,
+			})
+			return
+		}
     }
 	
-
-	idPlus := uri
+	imagePath := ""
 	
-	imagePath :=fmt.Sprintf("images/produk/%d-%s", idPlus ,file.Filename)
-	err = c.SaveUploadedFile(file,imagePath)
-	 if err != nil {
-        c.HTML(http.StatusInternalServerError, "error2.html", gin.H{
-            "error":      "Gagal menyimpan gambar.",
-            "title":      "add produk",
-            "isLoggedIn": true,
-        })
-        return
-    }
-
 	_, err = h.produkService.UpdateProduk(uri,input,imagePath)
 	if err !=nil {
 		c.HTML(http.StatusBadRequest, "error2.html", gin.H{
@@ -768,9 +762,15 @@ func (h *adminHandler) GetDetailUser(c *gin.Context){
 		})
 		return
 	}
+	avat := getuser.Avatar
+	if  avat ==""{
+		avat = "images/avatar/avatar.jpg"
+	}
+	
 
 	c.HTML(http.StatusOK,"userDetail.html", gin.H{
 		"users":getuser,
+		"avat" : avat,
 		"isLoggedIn": true,
 		"user":ser,
 		"avatar": avatar,
@@ -836,7 +836,7 @@ func ( h *adminHandler) DetailProduk(c *gin.Context){
 		return
 	}
 
-	c.HTML(http.StatusOK,"updateProduk.html", gin.H{
+	c.HTML(http.StatusOK,"produkDetail2.html", gin.H{
 		"produk":getproduk,
 		"user":user,
 		"avatar": avatar,

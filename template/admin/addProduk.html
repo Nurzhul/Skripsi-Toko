@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +6,22 @@
     <title>Hz Tani</title>
     <link rel="icon" type="image/png" href="../images/log.png" />
     <link rel="stylesheet" href="/css/profile.css" />
+    <style>
+      .produk-detail select {
+        width: 80%;
+        padding: 12px 7%;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      .produk-detail textarea {
+        width: 80%;
+        padding: 12px 7%;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,13 +72,21 @@
           {{ end }}<br />
 
           <input type="text" name="name" placeholder="Nama Barang" required />
-          <input
-            type="text"
+          <textarea
             name="description"
             placeholder="Deskripsi"
             required
-          />
-          <input type="text" name="category" placeholder="Kategori" required />
+            rows="4"
+            cols="50"
+          ></textarea>
+          <br />
+          <!-- <input type="text" name="category" placeholder="Kategori" required /> -->
+          <label for="category"> categori : </label><br />
+          <select name="category" id="category">
+            <option value="Alat">Alat</option>
+            <option value="Obat">Obat</option>
+            <option value="Pupuk">Pupuk</option>
+          </select>
           <input type="text" name="stock" placeholder="Stok" required />
           <input type="text" name="price" placeholder="Harga" required />
 

@@ -20,7 +20,7 @@
   <body>
     <!-- mulai Navbar  -->
     <nav class="navbar">
-      <a href="/dasboard" class="navbar-logo"><img src="../images/log.png" />Hs Tani</a>
+      <a href="/dasboard" class="navbar-logo"><img src="/images/log.png" />Hs Tani</a>
       <div class="navbar-nav">
         <a href="/dasboard">Home</a>
         <a href="/dasboard#about">Tentang Kami</a>
@@ -62,6 +62,7 @@
           <a href="/produk/transaction?status=Selesai" class="btn-kategori">Selesai</a>
           <a href="/produk/transaction?status=Dikemas" class="btn-kategori">Dikemas</a>
           <a href="/produk/transaction?status=Diantar" class="btn-kategori">Diantar</a>
+          <br><br><br>
           <a href="/produk/transaction?status=Diproses" class="btn-kategori">Diproses</a>
           <a href="/produk/transaction?status=Dikomfirmasi" class="btn-kategori">Dikonfirmasi</a>
           <a href="/produk/transaction/cara" class="btn-kategori">Cara Pembayaran</a>
@@ -101,7 +102,7 @@
              {{ .StatusPayment }}
           </div>
           <div> {{ .Pengambilan }}</div>
-          <button class="edit-btn"><a href="/produk/transaction/{{.ID}}">Lihat</a></button>
+          <a class="edit-btn" href="/produk/transaction/{{.ID}}">Lihat</a>
         </div>
         {{ end }}
       </div>
