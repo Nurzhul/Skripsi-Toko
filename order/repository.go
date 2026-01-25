@@ -95,7 +95,7 @@ func(r *repository) Update(order Order) (Order, error){
 
 func(r *repository) FindByStatus(status string) ([]Order, error){
     var order []Order
-    err:= r.db.Where("status LIKE ?","%"+status+"%").Find(&order).Error
+    err:= r.db.Where("status LIKE ?","%"+status+"%").Order("id DESC").Find(&order).Error
     if err != nil {
         return []Order{}, err
     }
@@ -105,7 +105,7 @@ func(r *repository) FindByStatus(status string) ([]Order, error){
 
 func(r *repository) FindByUserIdBystatus(userID int, status string) ([]Order, error){
     var order []Order
-    err := r.db.Where("user_id", userID).Where("status LIKE ?","%"+status+"%").Find(&order).Error
+    err := r.db.Where("user_id", userID).Where("status LIKE ?","%"+status+"%").Order("id DESC").Find(&order).Error
     if err != nil {
         return []Order{}, err
     }

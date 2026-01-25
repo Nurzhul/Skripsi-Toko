@@ -734,7 +734,7 @@ func (h *userHandler) ViewCart(c *gin.Context) {
 
     avatar := user.Avatar
     if avatar == "" {
-        avatar = "/images/avatar/avatar.jpg"
+        avatar = "images/avatar/avatar.jpg"
     }
 
     // Decode cart
@@ -976,6 +976,20 @@ func (h *userHandler) DecreaseCartItem(c *gin.Context) {
         }
     }
 
+	if len(newItems) == 0 {
+		session.Delete("cart")
+		session.Save()
+
+		c.JSON(http.StatusOK, gin.H{
+			"message":    "Cart kosong",
+			"removed":    true,
+			"isEmpty":    true,
+			"cart_count": 0,
+			"totalCart":  0,
+		})
+		return
+	}
+
     // Simpan perubahan
 	updatedCart, _ := json.Marshal(newItems)
    	session.Set("cart", string(updatedCart))
@@ -992,6 +1006,56 @@ func (h *userHandler) DecreaseCartItem(c *gin.Context) {
         "cart_count":     totalQty,
         "totalCart":   totalPrice,
 		"isLoggedIn":  true,
+    })
+}
+
+func (h *userHandler) RemoveCartItem(c *gin.Context) {
+	session := sessions.Default(c)
+    cartData := session.Get("cart")
+
+    if cartData == nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Cart kosong"})
+        return
+    }
+
+    itemID, _ := strconv.Atoi(c.Param("id"))
+    cartJSON, _ := cartData.(string)
+
+    var items []order.CartItem
+    json.Unmarshal([]byte(cartJSON), &items)
+
+    var newItems []order.CartItem
+    
+    // Filter: Masukkan semua item KECUALI yang ID-nya mau dihapus
+    for _, item := range items {
+        if item.ProductID != itemID {
+            newItems = append(newItems, item)
+        }
+    }
+
+    // Cek jika keranjang jadi kosong total
+    if len(newItems) == 0 {
+        session.Delete("cart")
+        session.Save()
+        c.JSON(http.StatusOK, gin.H{
+            "isEmpty": true, 
+            "cart_count": 0, 
+            "totalCart": 0,
+        })
+        return
+    }
+
+    // Simpan sisa item
+    updatedCart, _ := json.Marshal(newItems)
+    session.Set("cart", string(updatedCart))
+    session.Save()
+
+    totalQty, totalPrice := helper.TotalCart(newItems)
+
+    c.JSON(http.StatusOK, gin.H{
+        "isEmpty": false,
+        "cart_count": totalQty,
+        "totalCart": totalPrice,
     })
 }
 
@@ -1172,7 +1236,7 @@ func (h *userHandler) Carapay( c *gin.Context){
 
 	avatar := user.Avatar
 	if  avatar ==""{
-		avatar = "/images/avatar/avatar.jpg"
+		avatar = "images/avatar/avatar.jpg"
 	}
 
 	c.HTML(http.StatusOK,"caraPay.html", gin.H{

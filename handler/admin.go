@@ -367,12 +367,14 @@ func(h *adminHandler) UpdatePostProduk(c *gin.Context){
 		})
 		return
 	}
-
+    imagePath := ""
 	file , err := c.FormFile("image")
-	if err == nil {
-       idPlus := uri
+	if err != nil {
+      imagePath = ""
+    }else {
+		idPlus := uri
 	
-		imagePath :=fmt.Sprintf("images/produk/%d-%s", idPlus ,file.Filename)
+		imagePath = fmt.Sprintf("images/produk/%d-%s", idPlus ,file.Filename)
 		err = c.SaveUploadedFile(file,imagePath)
 		if err != nil {
 			c.HTML(http.StatusInternalServerError, "error2.html", gin.H{
@@ -382,9 +384,9 @@ func(h *adminHandler) UpdatePostProduk(c *gin.Context){
 			})
 			return
 		}
-    }
+	}
 	
-	imagePath := ""
+	
 	
 	_, err = h.produkService.UpdateProduk(uri,input,imagePath)
 	if err !=nil {
@@ -564,7 +566,7 @@ func(h *adminHandler) PostUpdateStatus(c *gin.Context){
 		return
 	}
 
-	session.Set("success", "Produk berhasil di update")
+	session.Set("success", "status transakasi berhasil diubah ")
 	session.Save()
 
 	c.Redirect(http.StatusFound,"/produkAdmin/Transaksi")
@@ -604,7 +606,7 @@ func(h *adminHandler) PostUpdateStatusPay(c *gin.Context){
 		return
 	}
 
-	session.Set("success", "Produk berhasil di update")
+	session.Set("success", "status pembayaran berhasil diubah")
 	session.Save()
 
 	c.Redirect(http.StatusFound,"/produkAdmin/Transaksi")

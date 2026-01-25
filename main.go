@@ -93,6 +93,7 @@ func main() {
 	router.GET("/produk/cartCount",AuthUserMiddleware(),userHandler.GetCartCount)
 	router.POST("/cart/increase/:id",AuthUserMiddleware(),userHandler.IncreaseCartItem)
 	router.POST("/cart/decrease/:id",AuthUserMiddleware(),userHandler.DecreaseCartItem)
+	router.POST("/cart/remove/:id", AuthUserMiddleware(),userHandler.RemoveCartItem)
 	// router.POST("/cart/decrease/:itemID",AuthUserMiddleware(),userHandler.DecreaseCartItem)
 	router.POST("/cart/order",AuthUserMiddleware(),userHandler.Checkout)
 	router.GET("/produk/transaction",AuthUserMiddleware(),userHandler.ViewTransaction)

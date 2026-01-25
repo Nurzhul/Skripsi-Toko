@@ -100,25 +100,42 @@ async function decreaseItem(id) {
   const result = await res.json();
 
   if (res.ok) {
+    // TAMBAHAN: Cek jika keranjang jadi kosong sepenuhnya
+    if (result.isEmpty) {
+      window.location.reload(); // Reload halaman agar Go Template merender tampilan kosong
+      return;
+    }
+
     if (result.removed) {
       document.getElementById(`row-${id}`).remove();
     } else {
       updateUI(id, result.itemQuantity, result.itemSubtotal, result.totalCart);
     }
+
+    // Update badge count
     const cartCountEl = document.getElementById("cart-count");
-    cartCountEl.textContent = result.cart_count;
+    if (cartCountEl) cartCountEl.textContent = result.cart_count;
   }
 }
 
 async function deleteItem(id) {
-  const res = await fetch(`/cart/decrease/${id}`, { method: "POST" });
+  // Panggil route remove yang baru
+  const res = await fetch(`/cart/remove/${id}`, { method: "POST" });
   const result = await res.json();
 
   if (res.ok) {
-    document.getElementById(`row-${id}`).remove();
+    if (result.isEmpty) {
+      window.location.reload();
+      return;
+    }
+
+    // Hapus elemen dari layar
+    const row = document.getElementById(`row-${id}`);
+    if (row) row.remove();
+
+    // Update total harga
     document.getElementById("total").textContent = `Rp ${result.totalCart}`;
-    const cartCountEl = document.getElementById("cart-count");
-    cartCountEl.textContent = result.cart_count;
+    document.getElementById("cart-count").textContent = result.cart_count;
   }
 }
 
