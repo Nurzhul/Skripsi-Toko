@@ -25,6 +25,7 @@ type Service interface {
 	UpdateStatusPayOrder(uri UriInputOrderID, input string) error
 	GetByStatus(status string) ([]Order, error)
 	GetByUserIdAndStatus(userID int, status string) ([]Order, error)
+	TotalCart(cart []CartItem) (totalQty int, totalPrice int)
 
 }
 func (s *service) CreateOrder(userID int, pay Peng, cartItems []CartItem) (Order, error) {
@@ -136,4 +137,12 @@ func(s *service) GetByUserIdAndStatus(userID int, status string) ([]Order, error
 	}
 
 	return order, nil
+}
+
+func (s *service) TotalCart(cart []CartItem) (totalQty int, totalPrice int) {
+	for _, item := range cart {
+		totalQty += item.Quantity
+		totalPrice += int(item.Quantity) * item.Price
+	}
+	return
 }

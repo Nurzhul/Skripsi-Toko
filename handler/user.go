@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"toko/helper"
 	"toko/order"
 	"toko/produk"
 	"toko/user"
@@ -902,7 +901,7 @@ func (h *userHandler) IncreaseCartItem(c *gin.Context) {
    			session.Set("cart", string(updatedCart))
             session.Save()
 			
-			totalQty, totalPrice := helper.TotalCart(items)
+			totalQty, totalPrice := h.orderService.TotalCart(items)
             c.JSON(http.StatusOK, gin.H{
                 "message": "Jumlah item bertambah",	
                 "item":    items[i],
@@ -996,7 +995,7 @@ func (h *userHandler) DecreaseCartItem(c *gin.Context) {
     session.Save()
 
     // Hitung total cart
-    totalQty, totalPrice := helper.TotalCart(newItems)
+    totalQty, totalPrice := h.orderService.TotalCart(newItems)
 
     c.JSON(http.StatusOK, gin.H{
         "message":      "Item dikurangi",
@@ -1050,7 +1049,7 @@ func (h *userHandler) RemoveCartItem(c *gin.Context) {
     session.Set("cart", string(updatedCart))
     session.Save()
 
-    totalQty, totalPrice := helper.TotalCart(newItems)
+    totalQty, totalPrice := h.orderService.TotalCart(items)
 
     c.JSON(http.StatusOK, gin.H{
         "isEmpty": false,
